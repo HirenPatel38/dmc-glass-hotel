@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ChevronDown, Star, Award, MapPin } from "lucide-react";
+import { ChevronDown, Star, Award, MapPin, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Hero() {
@@ -21,30 +21,29 @@ export default function Hero() {
       className="relative min-h-screen flex items-center overflow-hidden"
     >
       {/* Background Image with Parallax */}
-      <motion.div
-        style={{ y, scale }}
-        className="absolute inset-0"
-      >
+      <motion.div style={{ y, scale }} className="absolute inset-0">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=85')`,
           }}
         />
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-dmc-navy/80 via-dmc-navy/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-dmc-cream/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-dmc-surface/90 via-dmc-surface/60 to-dmc-surface/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0b1120] via-transparent to-dmc-surface/40" />
       </motion.div>
 
-      {/* Decorative Elements */}
-      <div className="absolute top-20 right-20 w-72 h-72 bg-dmc-gold/10 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-40 left-10 w-56 h-56 bg-white/5 rounded-full blur-2xl animate-float-delayed" />
+      {/* Decorative glowing orbs */}
+      <div className="absolute top-20 right-20 w-72 h-72 bg-dmc-cyan/8 rounded-full blur-3xl animate-float" />
+      <div className="absolute bottom-40 left-10 w-56 h-56 bg-dmc-gold/5 rounded-full blur-2xl animate-float-delayed" />
+
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+        backgroundSize: '60px 60px'
+      }} />
 
       {/* Content */}
-      <motion.div
-        style={{ opacity }}
-        className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 w-full"
-      >
+      <motion.div style={{ opacity }} className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 w-full">
         <div className="max-w-2xl">
           {/* Badge */}
           <motion.div
@@ -52,8 +51,8 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            <span className="inline-flex items-center gap-2 glass-subtle px-4 py-2 rounded-full text-sm font-medium text-white/90 mb-6">
-              <Star className="h-4 w-4 text-dmc-gold fill-dmc-gold" />
+            <span className="inline-flex items-center gap-2 glass-subtle px-4 py-2 rounded-full text-sm font-medium text-dmc-text-dim mb-6">
+              <Sparkles className="h-4 w-4 text-dmc-cyan" />
               Award-Winning Luxury Since 1987
             </span>
           </motion.div>
@@ -68,7 +67,7 @@ export default function Hero() {
             Where Luxury
             <br />
             Meets{" "}
-            <span className="text-gradient-gold">Serenity</span>
+            <span className="text-gradient-cyan">Precision</span>
           </motion.h1>
 
           {/* Description */}
@@ -76,11 +75,11 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
-            className="mt-6 text-lg text-white/70 max-w-lg leading-relaxed"
+            className="mt-6 text-lg text-dmc-text-dim max-w-lg leading-relaxed"
           >
-            Discover an unparalleled escape at DMC Hotel & Resort. Immerse yourself
-            in refined elegance, world-class amenities, and breathtaking views that
-            transform every moment into a cherished memory.
+            DMC Glass Hotel redefines hospitality with meticulous craft and
+            cutting-edge comfort. Every detail is engineered for an
+            experience you will not forget.
           </motion.p>
 
           {/* Stats */}
@@ -96,10 +95,10 @@ export default function Hero() {
               { icon: MapPin, label: "Locations", value: "12" },
             ].map((stat) => (
               <div key={stat.label} className="flex items-center gap-2">
-                <stat.icon className="h-4 w-4 text-dmc-gold" />
+                <stat.icon className="h-4 w-4 text-dmc-cyan" />
                 <div>
                   <span className="text-white font-semibold">{stat.value}</span>
-                  <span className="text-white/50 text-sm ml-1">{stat.label}</span>
+                  <span className="text-dmc-text-muted text-sm ml-1">{stat.label}</span>
                 </div>
               </div>
             ))}
@@ -114,7 +113,7 @@ export default function Hero() {
           >
             <Button
               size="lg"
-              className="bg-dmc-gold hover:bg-dmc-gold-light text-white px-8 py-6 rounded-full text-base font-semibold shadow-xl shadow-dmc-gold/30 transition-all duration-300 hover:shadow-2xl hover:shadow-dmc-gold/40 hover:-translate-y-0.5"
+              className="bg-dmc-cyan hover:bg-dmc-cyan/90 text-dmc-surface px-8 py-6 rounded-full text-base font-semibold shadow-xl shadow-dmc-cyan/30 transition-all duration-300 hover:shadow-2xl hover:shadow-dmc-cyan/40 hover:-translate-y-0.5"
               onClick={() => {
                 document.querySelector("#rooms")?.scrollIntoView({ behavior: "smooth" });
               }}
@@ -124,7 +123,7 @@ export default function Hero() {
             <Button
               size="lg"
               variant="outline"
-              className="glass border-white/20 text-white hover:bg-white/10 px-8 py-6 rounded-full text-base font-semibold backdrop-blur-sm"
+              className="glass border-white/15 text-white hover:bg-white/10 px-8 py-6 rounded-full text-base font-semibold backdrop-blur-sm"
               onClick={() => {
                 document.querySelector("#experience")?.scrollIntoView({ behavior: "smooth" });
               }}
@@ -147,10 +146,10 @@ export default function Hero() {
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           className="flex flex-col items-center gap-2"
         >
-          <span className="text-xs font-medium text-white/50 tracking-widest uppercase">
+          <span className="text-xs font-medium text-dmc-text-muted tracking-widest uppercase">
             Scroll
           </span>
-          <ChevronDown className="h-5 w-5 text-white/40" />
+          <ChevronDown className="h-5 w-5 text-dmc-text-muted" />
         </motion.div>
       </motion.div>
     </section>

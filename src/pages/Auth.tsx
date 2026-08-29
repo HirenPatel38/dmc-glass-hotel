@@ -15,8 +15,7 @@ import {
 } from "@/components/ui/input-otp";
 
 import { useAuth } from "@/hooks/use-auth";
-import logo from "@/assets/logo.svg";
-import { ArrowRight, Loader2, Mail, UserX } from "lucide-react";
+import { ArrowRight, Loader2, Mail, UserX, Terminal } from "lucide-react";
 import { Suspense, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 
@@ -110,33 +109,31 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-dmc-cream">
+    <div className="min-h-screen flex flex-col bg-[#0b1120]">
 
       {/* Background decoration */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-20 right-20 w-72 h-72 bg-dmc-gold/8 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-20 w-56 h-56 bg-dmc-gold/5 rounded-full blur-2xl" />
+        <div className="absolute top-20 right-20 w-72 h-72 bg-dmc-cyan/8 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-56 h-56 bg-dmc-cyan/5 rounded-full blur-2xl" />
       </div>
 
       {/* Auth Content */}
       <div className="flex-1 flex items-center justify-center relative z-10">
         <div className="flex items-center justify-center h-full flex-col">
-        <Card className="min-w-[350px] pb-0 glass border-white/40 shadow-xl shadow-black/[0.04]">
+        <Card className="min-w-[350px] pb-0 glass border-white/10 shadow-xl shadow-black/30">
+          <div className="py-4 px-6 text-center border-b border-white/10 rounded-t-xl">
+            <div className="flex items-center justify-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-dmc-cyan to-dmc-cyan-dim">
+                <Terminal className="h-4 w-4 text-dmc-surface" strokeWidth={2.5} />
+              </div>
+              <span className="text-sm font-bold tracking-[0.15em] text-dmc-text">DMC<span className="text-dmc-cyan">.</span></span>
+            </div>
+          </div>
           {step === "signIn" ? (
             <>
               <CardHeader className="text-center">
-              <div className="flex justify-center">
-                    <img
-                      src={logo}
-                      alt="Lock Icon"
-                      width={64}
-                      height={64}
-                      className="rounded-lg mb-4 mt-4 cursor-pointer"
-                      onClick={() => navigate("/")}
-                    />
-                  </div>
-                <CardTitle className="text-xl">Get Started</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-xl text-dmc-text">Get Started</CardTitle>
+                <CardDescription className="text-dmc-text-muted">
                   Enter your email to log in or sign up
                 </CardDescription>
               </CardHeader>
@@ -145,12 +142,12 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
                   
                   <div className="relative flex items-center gap-2">
                     <div className="relative flex-1">
-                      <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                      <Mail className="absolute left-3 top-3 h-4 w-4 text-dmc-text-muted" />
                       <Input
                         name="email"
                         placeholder="name@example.com"
                         type="email"
-                        className="pl-9"
+                        className="pl-9 glass border-white/10 bg-white/5 text-dmc-text placeholder:text-dmc-text-muted"
                         disabled={isLoading}
                         required
                       />
@@ -160,6 +157,7 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
                       variant="outline"
                       size="icon"
                       disabled={isLoading}
+                      className="border-white/10 hover:bg-white/5"
                     >
                       {isLoading ? (
                         <Loader2 className="h-4 w-4 animate-spin" />
@@ -178,7 +176,7 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
                         <span className="w-full border-t" />
                       </div>
                       <div className="relative flex justify-center text-xs uppercase">
-                        <span className="bg-background px-2 text-muted-foreground">
+                        <span className="bg-[#0b1120] px-2 text-dmc-text-muted">
                           Or
                         </span>
                       </div>
@@ -187,7 +185,7 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
                     <Button
                       type="button"
                       variant="outline"
-                      className="w-full mt-4"
+                      className="w-full mt-4 border-white/10 text-dmc-text-dim hover:bg-white/5"
                       onClick={handleGuestLogin}
                       disabled={isLoading}
                     >
@@ -201,9 +199,9 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
           ) : (
             <>
               <CardHeader className="text-center mt-4">
-                <CardTitle>Check your email</CardTitle>
-                <CardDescription>
-                  We've sent a code to {step.email}
+                <CardTitle className="text-dmc-text">Check your email</CardTitle>
+                <CardDescription className="text-dmc-text-muted">
+                  We sent a code to {step.email}
                 </CardDescription>
               </CardHeader>
               <form onSubmit={handleOtpSubmit}>
@@ -239,11 +237,11 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
                       {error}
                     </p>
                   )}
-                  <p className="text-sm text-muted-foreground text-center mt-4">
-                    Didn't receive a code?{" "}
+                  <p className="text-sm text-dmc-text-muted text-center mt-4">
+                    Did not receive a code?{" "}
                     <Button
                       variant="link"
-                      className="p-0 h-auto"
+                      className="p-0 h-auto text-dmc-cyan hover:text-dmc-cyan/80"
                       onClick={() => setStep("signIn")}
                     >
                       Try again
@@ -282,13 +280,13 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
             </>
           )}
 
-          <div className="py-4 px-6 text-xs text-center text-dmc-slate bg-dmc-gold/5 border-t border-white/20 rounded-b-lg">
+          <div className="py-4 px-6 text-xs text-center text-dmc-text-muted bg-white/[0.02] border-t border-white/10 rounded-b-lg">
             Secured by{" "}
             <a
               href="https://freebuff.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline hover:text-dmc-gold transition-colors font-medium"
+              className="underline hover:text-dmc-cyan transition-colors font-medium"
             >
               freebuff.com
             </a>

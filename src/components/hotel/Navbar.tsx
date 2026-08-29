@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router";
 
@@ -37,7 +37,7 @@ export default function Navbar() {
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "glass-strong shadow-lg shadow-black/[0.03]"
+            ? "glass-strong shadow-lg shadow-black/30"
             : "bg-transparent"
         }`}
       >
@@ -50,15 +50,15 @@ export default function Navbar() {
               className="flex items-center gap-3"
               whileHover={{ scale: 1.02 }}
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-dmc-gold to-dmc-gold-light shadow-lg shadow-dmc-gold/20">
-                <span className="text-lg font-bold text-white tracking-tight">D</span>
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-dmc-cyan to-dmc-cyan-dim shadow-lg shadow-dmc-cyan/20">
+                <Terminal className="h-5 w-5 text-dmc-surface" strokeWidth={2.5} />
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-bold tracking-[0.2em] text-dmc-navy">
-                  DMC
+                <span className="text-xl font-bold tracking-[0.2em] text-dmc-text">
+                  DMC<span className="text-dmc-cyan">.</span>
                 </span>
-                <span className="text-[10px] font-medium tracking-[0.35em] text-dmc-slate uppercase -mt-0.5">
-                  Hotel & Resort
+                <span className="text-[10px] font-medium tracking-[0.35em] text-dmc-text-muted uppercase -mt-0.5">
+                  Glass Hotel
                 </span>
               </div>
             </motion.a>
@@ -69,10 +69,10 @@ export default function Navbar() {
                 <button
                   key={link.href}
                   onClick={() => scrollTo(link.href)}
-                  className="relative px-4 py-2 text-sm font-medium text-dmc-slate hover:text-dmc-navy transition-colors group"
+                  className="relative px-4 py-2 text-sm font-medium text-dmc-text-dim hover:text-dmc-text transition-colors group"
                 >
                   {link.label}
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-0 bg-dmc-gold rounded-full group-hover:w-6 transition-all duration-300" />
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-0 bg-dmc-cyan rounded-full group-hover:w-6 transition-all duration-300" />
                 </button>
               ))}
             </nav>
@@ -82,14 +82,14 @@ export default function Navbar() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="gap-2 text-dmc-slate hover:text-dmc-navy"
+                className="gap-2 text-dmc-text-dim hover:text-dmc-text"
               >
                 <Phone className="h-4 w-4" />
                 +1 (888) 555-DMC
               </Button>
               <Button
                 size="sm"
-                className="bg-dmc-navy hover:bg-dmc-navy/90 text-white px-6 rounded-full text-sm font-medium shadow-lg shadow-dmc-navy/20 transition-all duration-300 hover:shadow-xl hover:shadow-dmc-navy/30"
+                className="bg-dmc-cyan hover:bg-dmc-cyan/90 text-dmc-surface px-6 rounded-full text-sm font-semibold shadow-lg shadow-dmc-cyan/20 transition-all duration-300 hover:shadow-xl hover:shadow-dmc-cyan/30"
                 onClick={() => navigate("/auth?returnTo=/dashboard")}
               >
                 Book Now
@@ -101,7 +101,7 @@ export default function Navbar() {
               onClick={() => setMobileOpen(!mobileOpen)}
               className="lg:hidden p-2 rounded-xl glass-subtle"
             >
-              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {mobileOpen ? <X className="h-5 w-5 text-dmc-text" /> : <Menu className="h-5 w-5 text-dmc-text" />}
             </button>
           </div>
         </div>
@@ -115,7 +115,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 pt-20 px-6 pb-6 bg-dmc-cream/95 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-40 pt-20 px-6 pb-6 bg-dmc-surface/95 backdrop-blur-xl lg:hidden"
           >
             <nav className="flex flex-col gap-2 mt-8">
               {navLinks.map((link, i) => (
@@ -125,7 +125,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.08 }}
                   onClick={() => scrollTo(link.href)}
-                  className="text-left text-lg font-medium text-dmc-navy py-3 px-4 rounded-xl hover:bg-white/60 transition-colors"
+                  className="text-left text-lg font-medium text-dmc-text py-3 px-4 rounded-xl hover:bg-white/5 transition-colors"
                 >
                   {link.label}
                 </motion.button>
@@ -137,7 +137,7 @@ export default function Navbar() {
                 className="mt-4"
               >
                 <Button
-                  className="w-full bg-dmc-navy hover:bg-dmc-navy/90 text-white rounded-full py-6 text-base"
+                  className="w-full bg-dmc-cyan hover:bg-dmc-cyan/90 text-dmc-surface rounded-full py-6 text-base font-semibold"
                   onClick={() => { setMobileOpen(false); navigate("/auth?returnTo=/dashboard"); }}
                 >
                   Book Your Stay
